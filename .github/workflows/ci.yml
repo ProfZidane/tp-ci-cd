@@ -13,7 +13,7 @@ jobs:
           python-version: 3.x
 
       - name: Installer les dépendances
-        run: pip install pytest
+        run: pip install -r requirements.txt
 
       - name: Exécuter les tests
         run: python -m unittest test.py
@@ -40,7 +40,7 @@ jobs:
       
       - name: Installer Snyk
         run: npm install -g snyk
-        
+
       - name: Analyse des dépendances avec Snyk
         run: snyk test --all-projects
         env:
