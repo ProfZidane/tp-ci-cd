@@ -46,14 +46,14 @@ jobs:
           echo "Répertoire actuel : $(pwd)"
           echo "Contenu du répertoire :"
           ls -alh
-          
+
       - name: Vérifier l'authentification Snyk
         run: snyk whoami
 
       - name: Analyse des dépendances avec Snyk
         run: |
-          snyk auth ${{secrets.SNYK_TOKEN}}
-          DEBUG=* snyk test --all-projects
+          snyk auth --auth-type=${{secrets.SNYK_TOKEN}}
+          snyk test --all-projects
 
 
   deploy:
