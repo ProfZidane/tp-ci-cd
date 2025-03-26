@@ -25,12 +25,6 @@ jobs:
       - name: Déclencher le déploiement sur Render
         run: |
           curl -X POST "https://api.render.com/deploy/srv-cvhs5hd2ng1s739un0q0?key=z-iifhu8zGs"
-
-      - name: Installer SonarScanner
-        run: |
-          curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
-          unzip sonar-scanner.zip
-          echo "$PWD/sonar-scanner-5.0.1.3006-linux/bin" >> $GITHUB_PATH
           
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
