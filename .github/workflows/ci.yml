@@ -40,7 +40,7 @@ jobs:
       
       - name: Installer Snyk avec Python
         run: |
-          pip install snyk -g
+          pip install snyk
         
       - name: Authentifier avec Snyk
         run: snyk auth ${{ secrets.SNYK_TOKEN }}
