@@ -26,3 +26,11 @@ jobs:
         run: |
           curl -X POST "https://api.render.com/deploy/srv-cvhs5hd2ng1s739un0q0?key=z-iifhu8zGs"
       
+      - name: Analyse du code avec SonarQube
+        run: |
+          sonar-scanner \
+          -Dsonar.organization=profzidane \
+          -Dsonar.projectKey=ProfZidane_tp-ci-cd \
+          -Dsonar.sources=. \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=$SONAR_TOKEN
