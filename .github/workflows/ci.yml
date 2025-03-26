@@ -42,9 +42,9 @@ jobs:
         run: npm install -g snyk
 
       - name: Analyse des dépendances avec Snyk
-        run: sudo snyk test --all-projects
-        env:
-          SNYK_TOKEN: ${{secrets.SNYK_TOKEN}}
+        run: |
+          snyk auth ${{secrets.SNYK_TOKEN}}
+          DEBUG=* snyk test --all-projects
 
 
   deploy:
