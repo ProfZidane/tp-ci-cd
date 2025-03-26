@@ -36,9 +36,9 @@ jobs:
           -Dsonar.projectKey=ProfZidane_tp-ci-cd \
           -Dsonar.sources=. \
           -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.login=$SONAR_TOKEN
+          -Dsonar.token=$SONAR_TOKEN
 
-          
+
   deploy:
     needs: security
     runs-on: ubuntu-latest
