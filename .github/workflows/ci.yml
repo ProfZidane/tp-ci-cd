@@ -17,16 +17,33 @@ jobs:
 
       - name: Exécuter les tests
         run: python -m unittest test.py
+      
 
-  deploy:
+  security:
     needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Installer SonarScanner
+        run: |
+          curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+          unzip sonar-scanner.zip
+          echo "$PWD/sonar-scanner-5.0.1.3006-linux/bin" >> $GITHUB_PATH
+
+      - name: Analyse du code avec SonarQube
+        run: |
+          sonar-scanner \
+          -Dsonar.organization=profzidane \
+          -Dsonar.projectKey=ProfZidane_tp-ci-cd \
+          -Dsonar.sources=. \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=$SONAR_TOKEN
+
+          
+  deploy:
+    needs: security
     runs-on: ubuntu-latest
     steps:
       - name: Déclencher le déploiement sur Render
         run: |
           curl -X POST "https://api.render.com/deploy/srv-cvhs5hd2ng1s739un0q0?key=z-iifhu8zGs"
-          
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v5
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        
